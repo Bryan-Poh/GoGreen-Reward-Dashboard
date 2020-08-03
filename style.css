@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+body{
+   font-family: 'Nunito';
+   background: white;
+}
+
+.main{
+	position: fixed;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	text-align: center;
+}
+
+h3{
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+p{
+	font-size: 1.1em;
+}
+
+.button{
+	background-color: #2971e6;
+	border-color: transparent;
+	border-radius:28px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:17px;
+	padding:10px 15px;
+	margin-top: 5%;
+	width: 100%;
+	text-decoration:none;
+}
+
+input[type=email], input[type=password], input[type=text]{
+	border-color: transparent;
+	background: #ededed;
+	color:black;
+	border-radius:28px;
+	display:inline-block;
+	padding:10px 15px;
+	margin-top: 5%;
+}

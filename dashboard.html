@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>GoGreen Partner Dashboard</title>
+
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+	<!-- Stylesheet -->
+	<link rel="stylesheet" href="style.css">
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div class="main form" onload="loadData()">
+		<h3>GoGreen Partner Dashboard</h3>
+		<hr>
+		<h4 id="welcome_message"></h4>
+		
+		<div class="container">
+		  <p>Rewards listed by you:</p>            
+		  <table class="table table-hover" id="rewardsTable">
+		    <thead>
+		      <tr>
+		        <th>Reward</th>
+		        <th>Instructions</th>
+		        <th>T&C</th>
+		        <th>Cost(pts)</th>
+		        <th>Qty</th>
+		        <th>Qty Left</th>
+		        <th>Expiry</th>
+		      </tr>
+		    </thead>
+		    <tbody id="tableBody">
+		      <!-- <tr>
+		        <td>John</td>
+		        <td>Doe</td>
+		        <td>john@example.com</td>
+		      </tr>
+		      <tr>
+		        <td>Mary</td>
+		        <td>Moe</td>
+		        <td>mary@example.com</td>
+		      </tr>
+		      <tr>
+		        <td>July</td>
+		        <td>Dooley</td>
+		        <td>july@example.com</td>
+		      </tr> -->
+		    </tbody>
+		  </table>
+		</div>
+	</div>
+
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyA0liDcnRuSs7wHR6v9lgXVr9Z8deaxswQ",
+	    authDomain: "gogreenfyp.firebaseapp.com",
+	    databaseURL: "https://gogreenfyp.firebaseio.com",
+	    projectId: "gogreenfyp",
+	    storageBucket: "gogreenfyp.appspot.com",
+	    messagingSenderId: "619281341565",
+	    appId: "1:619281341565:web:4f5596cdb2665ee717a514"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
+
+	<script src="index.js"></script>
+</body>
+</html>

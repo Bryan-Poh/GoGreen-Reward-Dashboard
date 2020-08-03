@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>GoGreen Partner Dashboard</title>
+
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+	<!-- Stylesheet -->
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div class="main form">
+		<h3>GoGreen Partner Dashboard</h3>
+		<p>Please login to continue</p>
+		<input type="email" placeholder="E-mail" id="email_field" /> 
+		<input type="password" placeholder="Password" id="password_field" /> 
+		<br>
+		<button class="button" id="login_btn" onclick="loginPartner()">Login</button>
+	</div>
+
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyA0liDcnRuSs7wHR6v9lgXVr9Z8deaxswQ",
+	    authDomain: "gogreenfyp.firebaseapp.com",
+	    databaseURL: "https://gogreenfyp.firebaseio.com",
+	    projectId: "gogreenfyp",
+	    storageBucket: "gogreenfyp.appspot.com",
+	    messagingSenderId: "619281341565",
+	    appId: "1:619281341565:web:4f5596cdb2665ee717a514"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
+
+	<!-- <script src="index.js"></script> -->
+	<script type="text/javascript">
+        // Initialize Cloud Firestore through Firebase
+		var db = firebase.firestore();
+
+
+		function loginPartner(){
+
+			var inputEmail = document.getElementById("email_field").value;
+			var inputPassword = document.getElementById("password_field").value;
+
+			db.collection("Partners").get().then((querySnapshot) => {
+			    querySnapshot.forEach((doc) => {
+			    	if(doc.data().email == inputEmail && doc.data().password == inputPassword){
+
+			    		localStorage.setItem('name', doc.data().name);
+			    		localStorage.setItem('email', doc.data().email);
+			    		top.location="dashboard.html";
+			    		window.alert("Logged in");
+
+			    	}
+			    });
+			});
+		}
+        
+        </script>
+</body>
+</html>
