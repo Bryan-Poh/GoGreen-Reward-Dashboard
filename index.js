@@ -38,7 +38,7 @@ function loadAllRewards(){
             document.getElementById("tableBody").innerHTML += "<tr> <td>" + rewardName 
             + "</td> <td>" + truncateString(rewardInstruction, 50) + "</td> <td>" + truncateString(rewardTAC, 50) + "</td> <td>" + 
             rewardCost + "</td> <td>" + rewardQty + "</td> <td>" + rewardQtyLeft + "</td> <td>" + rewardExpiry.toDate()
-            + "</td> </tr>";
+            + "</td> <td></tr>";
         });
 
         console.log("Current: ", rewardsList.join(", "));
@@ -97,7 +97,7 @@ function add_reward(){
 		// Insert reward into database
 		var db = firebase.firestore();
 		db.collection("Rewards").add({
-			imageUrl: url,
+			imageURL: url,
 			instructions: instruction_input,
 			name: rewardName_input,
 			pointsToRedeem: parseInt(cost_input),
