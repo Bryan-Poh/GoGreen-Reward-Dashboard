@@ -24,8 +24,9 @@
 		<h4 id="welcome_message"></h4>
 		
 		<div class="container">
-		  <p>Rewards listed by you:</p>            
-		  <table class="table table-hover" id="rewardsTable">
+				<button class="button-action" id="add_btn" data-toggle="modal" data-target="#exampleModalCenter"	>Add A Reward</button>
+          
+		  <table class="table table-hover table-striped" id="rewardsTable" style="height:100px;overflow:auto;">
 		    <thead>
 		      <tr>
 		        <th>Reward</th>
@@ -58,9 +59,38 @@
 		</div>
 	</div>
 
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLongTitle">Add a reward</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<label for="img">Reward image:</label><input type="file" id="img" name="img" accept="image/*">
+					<input type="text" placeholder="Reward name.." id="reward_name_field" class="reward_inputs" /> <br>
+	        <input type="text" placeholder="Usage instructions.." id="instruction_field" class="reward_inputs" /> <br>
+	        <input type="number" placeholder="Cost to redeem.." id="cost_field" class="reward_inputs" /> <br>
+	        <input type="number" placeholder="Reward quantity.." id="qty_field" class="reward_inputs" /> <br>
+	        <input type="text" placeholder="Terms & Conditions.." id="tac_field" class="reward_inputs" /> <br>
+	        <input type="date" placeholder="Reward end date.." id="date_field" class="reward_inputs" /> <br>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" onclick="add_reward()">Add reward</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
 	<!-- The core Firebase JS SDK is always required and must be listed first -->
 	<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-storage.js"></script>
 
 	<script>
 	  // Your web app's Firebase configuration
