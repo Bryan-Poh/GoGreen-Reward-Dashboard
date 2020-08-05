@@ -26,6 +26,7 @@ function loadAllRewards(){
         querySnapshot.forEach(function(doc) {
             rewardsList.push(doc.data().name);
 
+            var rewardID = doc.id;
             var rewardName = doc.data().name;
             var rewardInstruction = doc.data().instructions;
             var rewardTAC = doc.data().termsAndConditions;
@@ -38,7 +39,7 @@ function loadAllRewards(){
             document.getElementById("tableBody").innerHTML += "<tr> <td>" + rewardName 
             + "</td> <td>" + truncateString(rewardInstruction, 50) + "</td> <td>" + truncateString(rewardTAC, 50) + "</td> <td>" + 
             rewardCost + "</td> <td>" + rewardQty + "</td> <td>" + rewardQtyLeft + "</td> <td>" + rewardExpiry.toDate()
-            + "</td> <td></tr>";
+            + "</td> <td class='actionTD' data-value='" + rewardID + "'><input type='hidden' id='rewardID' value='" + rewardID + "'><a onclick='deleteReward(this)'><i class='tblDeleteBtn far fa-trash-alt'></i></a></tr>";
         });
 
         console.log("Current: ", rewardsList.join(", "));
@@ -53,6 +54,34 @@ function truncateString(str, num){
 	return str.slice(0, num) + '...';
 }
 
+function deleteReward(row){
+	// Insert reward into database
+	var db = firebase.firestore();
+
+	// Get the row's parent node
+	var x = row.parentNode.parentNode.rowIndex;
+
+	// Get attribute from cell in row (Hard coded cell num)
+	var id = document.getElementById("rewardsTable").rows[x].cells[7].getAttribute('data-value');
+	// console.log(x);
+	//console.log("id is " + id);
+
+
+	// Prompt user
+	// window.confirm("Are you sure you want to delete?");
+
+	// If user click yes
+	if (confirm("Are you sure you want to delete?")) {
+		db.collection("Rewards").doc(id).delete().then(function() {
+		    console.log("Document successfully deleted!");
+		    alert("Deleted reward");
+		}).catch(function(error) {
+		    alert("Error deleting reward");
+		    console.error("Error removing document: ", error);
+		});
+	}
+	//document.getElementById("rewardsTable").deleteRow(x);
+}
 function add_reward(){
 	// Store input fields in var
 	var img_input = document.getElementById("img").files;
@@ -84,8 +113,6 @@ function add_reward(){
 
 	const task = ref.child(img.name).put(img, metadata);
 
-
-
 	// Insert image into storage reference
 	task.then(snapshot => snapshot.ref.getDownloadURL())
 	.then(url => {
@@ -96,6 +123,7 @@ function add_reward(){
 
 		// Insert reward into database
 		var db = firebase.firestore();
+
 		db.collection("Rewards").add({
 			imageURL: url,
 			instructions: instruction_input,
