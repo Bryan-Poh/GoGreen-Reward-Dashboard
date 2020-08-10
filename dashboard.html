@@ -63,7 +63,7 @@
 		</div>
 	</div>
 
-	<!-- Modal -->
+	<!-- Add Modal -->
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
 	    <div class="modal-content">
@@ -75,16 +75,90 @@
 	      </div>
 	      <div class="modal-body">
 	      	<label for="img">Reward image:</label><input type="file" id="img" name="img" accept="image/*">
-					<input type="text" placeholder="Reward name.." id="reward_name_field" class="reward_inputs" /> <br>
-	        <input type="text" placeholder="Usage instructions.." id="instruction_field" class="reward_inputs" /> <br>
-	        <input type="number" placeholder="Cost to redeem.." id="cost_field" class="reward_inputs" /> <br>
-	        <input type="number" placeholder="Reward quantity.." id="qty_field" class="reward_inputs" /> <br>
-	        <input type="text" placeholder="Terms & Conditions.." id="tac_field" class="reward_inputs" /> <br>
-	        <input type="date" placeholder="Reward end date.." id="date_field" class="reward_inputs" /> <br>
+	      	<div class="updateInput">
+						<input type="text" placeholder="Reward name.." id="reward_name_field" class="reward_inputs" /> <br>
+					</div>
+
+					<div class="updateInput">
+		        <input type="text" placeholder="Usage instructions.." id="instruction_field" class="reward_inputs" /> <br>
+		      </div>
+
+		      <div class="updateInput">
+		        <input type="number" placeholder="Cost to redeem.." id="cost_field" class="reward_inputs" /> <br>
+		      </div>
+
+		      <div class="updateInput">
+		        <input type="number" placeholder="Reward quantity.." id="qty_field" class="reward_inputs" /> <br>
+		      </div>
+
+		      <div class="updateInput">
+		        <input type="text" placeholder="Terms & Conditions.." id="tac_field" class="reward_inputs" /> <br>
+		      </div>
+
+		      <div class="updateInput">
+		        <input type="date" placeholder="Reward end date.." id="date_field" class="reward_inputs" /> <br>
+		      </div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	        <button type="button" class="btn btn-primary" onclick="add_reward()">Add reward</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Update Modal -->
+	<div class="update_modal  form-horizontal modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLongTitle">Update  reward</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body" id="updateModalID">
+	      	<!-- Image -->
+	      	<input type="hidden" id="updateRewardID" />
+
+	      	<div class="updateInput">      		
+		      	<label for="update_name_field">Reward Name</label>
+		        <input type="text" placeholder="Reward Name.." id="update_name_field" class="reward_inputs" disabled="disabled" /> <br>
+	      	</div>
+
+	      	<div class="updateInput">
+	      		<label for="update_cost_field">Cost To Redeem</label>
+		        <input type="number" placeholder="Cost to redeem.." id="update_cost_field" class="reward_inputs" disabled="disabled" /> <br>
+	      	</div>
+
+	      	<div class="updateInput">      		
+		      	<label for="update_instruction_field">Instructions</label>
+		        <input type="text" placeholder="Usage instructions.." id="update_instruction_field" class="reward_inputs" /> <br>
+	      	</div>
+
+	      	<div class="updateInput">      		
+		      	<label for="update_qty_field">Quantity</label>
+		        <input type="number" placeholder="Reward quantity.." id="update_qty_field" class="reward_inputs" /> <br>
+	      	</div>
+
+	      	<div class="updateInput">      		
+		      	<label for="update_qtyLeft_field">Quantity Left</label>
+		        <input type="number" placeholder="Reward quantity left.." id="update_qtyLeft_field" class="reward_inputs" /> <br>
+	      	</div>
+
+	      	<div class="updateInput">      		
+		      	<label for="update_tac_field">Terms And Conditions</label>
+		        <input type="text" placeholder="Terms & Conditions.." id="update_tac_field" class="reward_inputs" /> <br>
+	      	</div>
+
+	      	<div class="updateInput">      		
+		      	<label for="update_date_field">Reward end date</label>
+		        <input type="date" placeholder="Reward end date.." id="update_date_field" class="reward_inputs" /> <br>
+	      	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" onclick="updateReward(this)">Update reward</button>
 	      </div>
 	    </div>
 	  </div>

@@ -39,7 +39,7 @@ function loadAllRewards(){
             document.getElementById("tableBody").innerHTML += "<tr> <td>" + rewardName 
             + "</td> <td>" + truncateString(rewardInstruction, 50) + "</td> <td>" + truncateString(rewardTAC, 50) + "</td> <td>" + 
             rewardCost + "</td> <td>" + rewardQty + "</td> <td>" + rewardQtyLeft + "</td> <td>" + rewardExpiry.toDate()
-            + "</td> <td class='actionTD' data-value='" + rewardID + "'><input type='hidden' id='rewardID' value='" + rewardID + "'><a onclick='deleteReward(this)'><i class='tblDeleteBtn far fa-trash-alt'></i></a></tr>";
+            + "</td> <td class='actionTD' data-value='" + rewardID + "'><input type='hidden' id='rewardID' value='" + rewardID + "'><a onclick='deleteReward(this)'><i class='tblDeleteBtn far fa-trash-alt'></i></a> <a data-toggle='update_modal' data-target='#updateModal' onclick='getUpdateReward(this)'><i class='tblUpdateBtn fas fa-edit'></i></a></tr>";
         });
 
         console.log("Current: ", rewardsList.join(", "));
@@ -52,6 +52,79 @@ function truncateString(str, num){
 	}
 	// Return str truncated with '...' concatenated to the end of str.
 	return str.slice(0, num) + '...';
+}
+
+function convertDate(str) {
+  var date = new Date(str),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+  return [date.getFullYear(), mnth, day].join("-");
+}
+
+function getUpdateReward(row){
+	$('#updateModal').modal('show');
+
+	// Get data
+	var db = firebase.firestore();
+
+	// Get the row's parent node
+	var x = row.parentNode.parentNode.rowIndex;
+
+	// Get attribute from cell in row (Hard coded cell num)
+	var id = document.getElementById("rewardsTable").rows[x].cells[7].getAttribute('data-value');
+
+	// From firebase retrieve data from id
+	var docRef = db.collection("Rewards").doc(id);
+	docRef.get().then(function(doc) {
+	    if (doc.exists) {
+				document.getElementById("updateRewardID").value = doc.id;
+
+	    	// Set data
+    	  document.getElementById("update_name_field").value = doc.data().name;
+    	  document.getElementById("update_cost_field").value = doc.data().pointsToRedeem;
+    	  document.getElementById("update_qty_field").value = doc.data().quantity;
+    	  document.getElementById("update_qtyLeft_field").value = doc.data().quantityLeft;
+    	  document.getElementById("update_instruction_field").value = doc.data().instructions;
+    	  document.getElementById("update_tac_field").value = doc.data().termsAndConditions;
+
+
+    	  console.log(doc.data().useByDate.toDate());
+    	  document.getElementById("update_date_field").value = convertDate(doc.data().useByDate.toDate());
+	    } else {
+	        // doc.data() will be undefined in this case
+	        console.log("No such document!");
+	    }
+	}).catch(function(error) {
+	    console.log("Error getting document:", error);
+	});
+}
+
+function updateReward(row){
+	var db = firebase.firestore();
+	// 
+	var id = document.getElementById("updateRewardID").value;
+
+	var new_date_format = firebase.firestore.Timestamp.fromDate(toDate(document.getElementById("update_date_field").value));
+	// Update
+	var rewardsRef = db.collection("Rewards").doc(id);
+
+	rewardsRef.update({
+	    name: document.getElementById("update_name_field").value,
+	    instructions: document.getElementById("update_instruction_field").value,
+	    pointsToRedeem: parseInt(document.getElementById("update_cost_field").value),
+	    quantity: parseInt(document.getElementById("update_qty_field").value),
+	    quantityLeft: parseInt(document.getElementById("update_qtyLeft_field").value),
+	    termsAndConditions: document.getElementById("update_tac_field").value,
+	    useByDate: new_date_format,
+	})
+	.then(function() {
+			alert("Updated reward");
+	    console.log("Document successfully updated!");
+	})
+	.catch(function(error) {
+	    // The document probably doesn't exist.
+	    console.error("Error updating document: ", error);
+	});
 }
 
 function deleteReward(row){

@@ -7,6 +7,9 @@
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+	<!-- FontAwesome -->
+	<script src="https://kit.fontawesome.com/b918a19176.js" crossorigin="anonymous"></script>
+
 	<!-- Stylesheet -->
 	<link rel="stylesheet" href="style.css">
 </head>
@@ -17,7 +20,7 @@
 			<h3>GoGreen Partner Dashboard</h3>
 			<p>Please login to continue</p>
 			<input type="email" placeholder="E-mail" id="email_field" /> 
-			<input type="password" placeholder="Password" id="password_field" /> 
+			<input type="password" placeholder="Password" id="password_field" /> <i class="password-eye far fa-eye" id="password_eye_toggle" onclick="password_toggle(this)"></i>
 			<br>
 			<button class="button" id="login_btn" onclick="loginPartner()">Login</button>
 		</div>
@@ -47,9 +50,7 @@
         // Initialize Cloud Firestore through Firebase
 		var db = firebase.firestore();
 
-
 		function loginPartner(){
-
 			var inputEmail = document.getElementById("email_field").value;
 			var inputPassword = document.getElementById("password_field").value;
 
@@ -66,7 +67,18 @@
 			    });
 			});
 		}
+
+		function password_toggle(i){
+			var x = document.getElementById("password_field");
+		  if (x.type === "password") {
+		    x.type = "text";
+		  } else {
+		    x.type = "password";
+		  }
+
+		  i.classList.toggle("fa-eye-slash");
+		}
         
-        </script>
+	</script>
 </body>
 </html>
