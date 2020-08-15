@@ -120,10 +120,11 @@ function updateReward(row){
 	.then(function() {
 			alert("Updated reward");
 	    console.log("Document successfully updated!");
+	    $('#updateModal').modal('hide');
 	})
 	.catch(function(error) {
 	    // The document probably doesn't exist.
-	    console.error("Error updating document: ", error);
+	    alert("Error. Try again later.");
 	});
 }
 
@@ -216,6 +217,8 @@ function add_reward(){
 	});
 
 	clearForm();
+	$('#exampleModalCenter').modal('hide');
+
 }
 
 function toDate(dateStr) {
